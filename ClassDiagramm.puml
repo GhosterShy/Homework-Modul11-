@@ -1,0 +1,48 @@
+@startuml
+' https://plantuml.com/class-diagram
+
+class Book {
+    - title: String
+    - author: String
+    - ISBN: String
+    - status: Status
+    + getTitle(): String
+    + getAuthor(): String
+    + getISBN(): String
+    + getStatus(): Status
+    + setStatus(status: Status): void
+}
+
+enum Status {
+    AVAILABLE
+    BORROWED
+}
+
+class Reader {
+    - name: String
+    - borrowedBooks: List<Book>
+    + borrowBook(book: Book): boolean
+    + returnBook(book: Book): void
+    + getBorrowedBooks(): List<Book>
+}
+
+class Librarian {
+    - name: String
+    + addBook(library: Library, book: Book): void
+    + removeBook(library: Library, book: Book): void
+}
+
+class Library {
+    - books: List<Book>
+    + addBook(book: Book): void
+    + removeBook(book: Book): boolean
+    + searchByTitle(title: String): List<Book>
+    + searchByAuthor(author: String): List<Book>
+    + displayBooks(): void
+}
+
+Library "1" *-- "0..*" Book
+Reader "1" o-- "0..*" Book
+Librarian "1" -- "1" Library
+
+@enduml

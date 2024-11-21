@@ -1,0 +1,18 @@
+@startuml
+package "Hotel Booking System" {
+    component UI_Component
+    component HotelService
+    component BookingService
+    component PaymentService
+    component NotificationService
+    component UserManagementService
+
+    UI_Component --> HotelService: Search Hotels
+    UI_Component --> BookingService: Manage Booking
+    UI_Component --> UserManagementService: Auth/Registration
+    BookingService --> HotelService: Check Availability
+    BookingService --> PaymentService: Process Payment
+    BookingService --> NotificationService: Send Confirmation
+    NotificationService --> UserManagementService: User Details
+}
+@enduml
